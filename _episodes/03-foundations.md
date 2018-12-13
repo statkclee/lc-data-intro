@@ -1,9 +1,10 @@
 ---
-title: "Foundations"
+title: "밑바탕 토대"
 teaching: 45
 exercises: 0
 questions:
 - What best practices and generic skills can be used to successfully use and create library related programs?
+- 도서관과 관련된 
 objectives:
 - Identify best practices in using software and data
 - Identify best practices in saving files
