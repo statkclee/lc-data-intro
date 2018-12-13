@@ -1,27 +1,30 @@
 ---
-title: "Jargon Busting"
+title: "전문용어해설(Jargon Busting)"
 teaching: 15
 exercises: 30
 questions:
-- What terms, phrases, or ideas around code or software development have you come across and perhaps feel you should know better?
+- 코딩 혹은 소프트웨어 개발관련하여 생각나는 용어, 문구, 아이디어는 무엇이고 더 잘 알면 좋을까요?
 objectives:
-- Explain terms, phrases, and concepts associated with software development in libraries
-- Compare knowledge of these terms, phrases, and concepts
-- Differentiate between these terms, phrases, and concepts
+- 도서관 분야에서 소프트웨어 연관된 용어, 문구, 개념을 설명한다.
+- 상기 용어, 문구, 개념에 대한 지식을 비교한다.
+- 상기 용어, 문구, 개념에 대해 확실히 차별화한다.
 keypoints:
-- It helps to share what you know and don't know about software development and data science jargon
+- 이미 잘 아는 것을 공유하도록 하고, 소프트웨어 개발과 데이터 과학 전문용어에 관해서 모르는 것을 확실히 한다.
 ---
 
-> ## Jargon Busting
+> ## 전문용어해설 (Jargon Busting)
 >
-> This exercise is an opportunity to begin to ask questions and to get a firmer grasp on the concepts around data, code or software development in libraries.
+> 
+> 이번 연습문제는 질문을 던짐으로서, 도서관영역에서 데이터, 코드, 소프트웨어 개발에 관한 개념을 확실히 이해할 수 있게 하는 좋은 기회를 제공한다.
 >
-1. Pair with a neighbor and decide who will take notes. 
-1. Talk for 3 minutes (your instructor will be timing you!) on any terms, phrases, or ideas around code or software development in libraries that you've come across and perhaps feel you should know better.
-1. Next, get into groups of 4-6.
-1. Make a list of all the problematic terms, phrases, and ideas each pair came up with. Retain duplicates.
-1. Identify common words as a starting point - spend 10 minutes working together to try to explain what the terms, phrases, or ideas on your list mean.  Note: use both each other and the internet as a resource.
-1. Identify the terms your groups resolves as well as those you are still struggling with.
-1. Each group then reports back on one issue resolved by their group and one issue not resolved by their group.
-1. The instructor will collate these on a whiteboard and facilitate a discussion about what we will cover today and where you can go for help on those things we won't cover. Any jargon or terms that will not be covered specifically are good notes.
+
+1. 주변 동료와 짝을 이뤄서 서기담당자를 지정한다.
+1. (강사는 시간을 측정한다!) 마음속에 떠오르고, 더 잘 알았으면 하는 소프트웨어 개발관련 어떤 용어, 문구, 아이디어를 가지고 3분간 토론한다.
+1. 다음 4-6번 사항을 하나로 묶는다.
+1. 각 그룹별로 제시된 문제가 내포된 단어, 문구, 아이디어 목록을 만든다. 중복항목은 따로 보관한다.
+1. 가장 많이 도출된 단어를 가지고 시작한다 - 목록에 적힌 단어, 문구, 아이디어가 무엇인지 설명하는데 10분을 사용한다. 주목: 상호참여하고 인터넷도 자원으로 사용한다.
+1. 그룹별로 해결한 용어 뿐만 아니라 해결하지 못한 용어도 식별한다.
+1. 그리고 나서 각 그룹별로 다른 그룹에서 해결한 용어 문제와 해결하지 못한 못한 용어를 보고한다.
+1. 강사가 칠판에 한데 모아 적어 넣고 당일 다룰 내용과 다루지 못한 것에 대해서 어디로 가야 도움이 될지 안내를 한다. 구체적으로 다루지 않는 전문용어 또는 용어는 좋은 메모가 된다.
+
 {: .challenge}
