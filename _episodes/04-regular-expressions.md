@@ -1,30 +1,43 @@
 ---
-title: "Regular Expressions"
+title: 정규 표현식
 teaching: 20
 exercises: 25
 questions:
-- How can you imagine using regular expressions in your work?
+- "본인 작업에 정규 표현식을 사용한다는 사실이 상상이 가는가?"
 objectives:
-- Use regular expressions in searches
+- 검색에 정규 표현식을 사용한다.
 keypoints:
-- Regular expressions are a language for pattern matching
-- "Test regular expressions interactively with [regex101.com](https://regex101.com/) or [RegExr.com](http://www.regexr.com/), and visualise them with [regexper.com](https://regexper.com/)."
-- "Test yourself with: [RegexCrossword.com/](https://regexcrossword.com/) or [our Multiple Choice Quiz](https://librarycarpentry.github.io/lc-data-intro/05-quiz/)."
+- "정규 표현식은 패턴을 매칭하는 언어다."
+- "정규 표현식을 인터랙티브하게 [regex101.com](https://regex101.com/) 혹은 [RegExr.com](http://www.regexr.com/) 웹사이트에서 테스트하고, [regexper.com](https://regexper.com/) 사이트에서 시각화도 해본다."
+- "[RegexCrossword.com/](https://regexcrossword.com/) 혹은 [다중선택 퀴](https://librarycarpentry.github.io/lc-data-intro/05-quiz/)를 풀어본다."
 ---
 
-## Regular expressions
+## 정규 표현식(Regular expressions)
 
-Regular expressions are a concept and an implementation used in many different programming environments for sophisticated pattern matching. They are an incredibly powerful tool that can amplify your capacity to find, manage, and transform data and files. 
+정규 표현식은 많은 프로그래밍 환경에서 정교한 패턴을 매칭하는데 사용되는 개념이면서 구현체이도 하다.
+믿을 수 없을 정도로 강력한 도구라서 데이터와 파일에서 무언가를 찾고 관리하고 변형시키는 능력을 획기적으로 증대시킨다.
 
-A regular expression, often abbreviated to *regex*, is a method of using a sequence of characters to define a search to match strings, i.e. "find and replace"-like operations. In computation, a 'string' is a contiguous sequence of symbols or values. For example, a word, a date, a set of numbers (e.g., a phone number), or an alphanumeric value (e.g., an identifier). In library searches, we are most familiar with a small part of regular expressions known as the "wild card character," but there are many more features to the complete regular expressions syntax. Regular expressions will let you:
 
-- Match on types of characters (e.g. 'upper case letters', 'digits', 'spaces', etc.)
-- Match patterns that repeat any number of times
-- Capture the parts of the original string that match your pattern
+정규 표현식(regular expression)을 줄여서 *regex*로 표기하기도 한다. 
+문자 순열을 사용해서 문자열을 매칭하도록 검색을 정의하는 방법("찾아서 바꾸는(find and replace)" 유형의 연산)으로 알려져 있다.
+전산(computation)에서 문자열(string)은 인접한 기호 또는 값의 순열이다.
+예를 들어, 단어, 날짜, 숫자 집합(예를 들어, 전화번호), 알파벳 영숫자 값(예를 들어, 식별자)이 이에 해당된다.
+도서관 검색에서 "와일드 카드 문자"로 알려진 일부 정규표현식 사용에는 누구나 친숙하다.
+하지만, 완전한 정규 표현식 구문에는 훨씬 더 많은 기능이 있다. 정규 표현식을 통해서 다음 기능을 익힐 수 있다:
 
-Regular expressions rely on the use of literal characters and metacharacters. A metacharacter is any ASCII character that has a special meaning. By using metacharacters and possibly literal characters, you can construct a regex for finding strings or files that match a pattern rather than a specific string. For example, say your organization wants to change the way they display telephone numbers on their website by removing the parentheses around the area code. Rather than search for each specific phone number (that could take forever and be prone to error) or searching for every open parenthesis character (could also take forever and return many false-positives), you could search for the pattern of a phone number. 
+- 문자 유형에 따라 매칭할 수 있다 (예를 들어, '대문자', '숫자', '공백', 등 )
+- 반복되는 패턴을 매칭할 수 있다.
+- 본인이 정의한 패턴과 매칭되는 원본 문자열의 일부를 잡아낼 수 있다.
+
+정규표현식은 문자 그대로의 문자(리터럴 문자, literal character)와 메타문자 사용을 기반으로 한다.
+메타문자(metacharacter)는 특별한 의미를 갖는 ASCII 문자를 지칭한다.
+메타문자와 리터럴 문자를 사용함으로써 특정 문자열 보다는 패턴과 매칭되는 문자열 혹은 파일을 찾아낼 수 있는 정규 표현식을 만들어 낼 수 있게 된다.
+예를 들어, 지역코드를 감싼 괄호를 제거해서 웹사이트에 전화번호 표시방법을 바꾸는 경우를 가정해보자.
+전화번호 전부를 찾거나 (상당히 시간이 많이 걸리고 실수하기 쉽다.) 여는 괄호 문자를 전수 조사하는 것(상당히 시간도 많이 걸리고 거짓 양성이 많을 수 있음)보다 전화번호 패턴을 찾는 것도 방법이다.
 
 Since regular expressions defines some ASCII characters as "metacharacters" that have more than their literal meaning, it is also important to be able to "escape" these metacharacters to use them for their normal, literal meaning. For example, the period (\.) means "match any character", but if you want to match a period (\.) then you will need to use a "\" in front of it to signal to the regular expression processor that you want to use the period as a plain old period and not a metacharacter. That notation is called "escaping" the special character. The concept of "escaping" special characters is shared across a variety of computational settings, including markdown and HTML.  
+
+
 
 A very simple use of a regular expression would be to locate the same word spelled two different ways. For example the regular expression `organi[sz]e` matches both "organise" and "organize". But it would also match `reorganise`, `reorganize`, `organises`, `organizes`, `organised`, `organized`, etc.
 
