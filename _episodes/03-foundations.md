@@ -35,8 +35,6 @@ keypoints:
 대부분의 경우 컴퓨터가 의도한 바를 잘못 이해하는 경우가 있는데 이유는 컴퓨터는 원래 자신이 아는 한도내에서 동작하기 때문이다.
 
 
-### Why take an automated or computational approach?
-
 ### 자동화 즉 컴퓨팅 접근법을 취하는 이유는 뭘까?
 
 다른 말로 바꾸게 되면, "수작업으로 못 할 이유는 뭘까?"라는 질문과 같다.
@@ -96,50 +94,80 @@ TSV와 CSV 파일 모두 스프레드쉬트 형식이다. 이러한 일반 평�
 별표(`*`) 두개 혹은 해쉬(`#`) 3개를 사용해서 데이터 기능을 표현하는 단순한 표기법이 더 선호된다;
 예를 들어, 의문부호 3개를 사용해서 추적할 무언가를 나타내는 경우가 있다. 왜 `???`을 골랐나면 <kbd>Ctrl</kbd>+<kbd>F</kbd>/<kbd>Command</kbd>+<kbd>F</kbd>으로 쉽게 검색할 수 있기 때문이다.
 
-### Use machine readable plain text notation for formatting
-There are some simple notation schemes that are also plain text and machine readable, but can be used to render simple formatting. One such scheme is called Markdown, a lightweight markup language. A markup language is a a metadata language that uses notation to distinguish between the content and the formatting of the content. Markdown files, which use the file extension `.md`, are machine readable, human readable, and used in many contexts - for example, GitHub renders text via Markdown. An excellent [Markdown cheat sheet is available on GitHub](https://github.com/adam-p/markdown-here) for those who wish to follow – or adapt – this existing schema. 
+### 외양을 꾸미는데(formatting) 기계판독이 가능한 평문 텍스트 표기법을 사용한다.
 
-### Applications for writing, reading and outputting plain text files
-For Windows users, Notepad++ http://notepad-plus-plus.org/ is recommended. Mac or Unix users may find Komodo Edit, Text Wrangler, Kate, or Atom helpful. Combined with [pandoc](http://pandoc.org/), a Markdown file can be exported to PDF, HTML, a formatted Word document, LaTeX or other formats, so it is a great way to create machine-readable, easily searchable documents that can be repurposed in many ways. This [Programming Historian](https://programminghistorian.org/) [tutorial](https://programminghistorian.org/en/lessons/sustainable-authorship-in-plain-text-using-pandoc-and-markdown) spells out what to do. 
+평문 텍스트이면서 기계 판독이 가능하면서도 단순한 외양 꾸미는데 사용될 수 있는 간단한 표기법이 몇개 존재한다.
+대표적인 표기법이 마크다운(markdown)으로, 일종의 가벼운 마크업 언어(lightweight markup language)다.
+마크업 언어는 메타데이터(metadata) 언어로 콘텐츠와 콘텐츠 외양을 꾸미는 것을 구분하는데 표기법(notation)을 사용한다.
+마크다운 파일은 확장자로 `.md`를 사용하는데 기계판독이 가능하고 사람도 읽을 수 있어서 다양하게 활용된다.
+예를 들어 GitHub은 마크다운으로 텍스트를 생성시킨다.
+[GitHub 마크다운 컨닝쪽지(cheat sheet)](https://github.com/adam-p/markdown-here)를 사용해서 기존 스키마를 따라서 사용할 수도 있고 변형해서 사용하는 것도 가능하다.
 
-### Naming files sensible things is good for you and for your computers
 
-Working with data is made easier by structuring your files in a consistent and predictable manner. Without structured information, our lives would be much poorer. As library and archive people, we know this. But let's linger on this a little longer because for working with data it is especially important.
+### 평문 텍스트 파일을 작성하고 불러 읽어 들이고 출력하는데 적합한 응용프로그램
 
-Examining URLs is a good way of thinking about why structuring data in a consistent and predictable manner might be useful in your work. Good URLs represent with clarity the content of the page they identify, either by containing semantic elements or by using a single data element found across a set or majority of pages.
+윈도우 사용자의 경우 Notepad++ [http://notepad-plus-plus.org/](http://notepad-plus-plus.org/)를 추천한다.
+맥이나 유닉스/리눅스 사용자는 Komodo Edit, Text Wrangler, Kate, Atom 편집기가 도움이 될 수 있다.
+[pandoc](http://pandoc.org/)과 결합해서 마크다운 파일을 PDF, HTML, 워드 문서, LaTeX 혹은 다른 포맷파일로 내보내기 할 수도 있다.
+다양한 방식으로 다른 목적에 맞도록 변경시킬 수 있으며, 기계판독이 가능하고 쉽게 검색가능한 문서를 생성하는 것은 정말로 좋다.
+[Programming Historian](https://programminghistorian.org/) [tutorial](https://programminghistorian.org/en/lessons/sustainable-authorship-in-plain-text-using-pandoc-and-markdown)을 참조하면 마크다운으로 저작하고 다양한 목적에 맞춰 문서를 변경시킬 수 있는 방법이 자세히 기술되어 있다.
 
-A typical example of the former are the URLs used by news websites or blogging services. WordPress URLs follow the format:
+
+### 파일명을 잘 생각해서 짓는 것은 본인 자신과 컴퓨터 모두에게 유익하다.
+
+데이터로 작업할 때 파일을 일관되고 예측가능한 형태로 구성하면 삶이 편안해진다.
+구조화된 정보가 없게 되면 삶의 질이 현격히 떨어진다.
+도서관과 기록보관소(archive) 직업을 갖는 누구나 이런 사실을 잘 알고 있다.
+하지만, 이점에 대해서 좀더 집고 넘어가자. 왜냐하면 데이터로 작업할 때 특히 중요하기 때문이다.
+
+URL을 자세히 살펴보면 데이터를 일관되고 예측가능한 방식으로 구조화하는 것이 본인 작업에도 유용한지 생각해볼 수 있는 좋은 사례가 된다.
+훌륭한 URL은 식별하고자 하는 웹페이지 콘텐트를 확실히 나타낸다.
+의미론적 요소(semantic element)를 담아내거나 혹은 웹페이지 전반에 걸쳐 파악되는 단일 데이터 요소(data element)를 사용하는 방식을 취한다.
+
+앞선 좋은 사례로 뉴스 웹사이트 혹은 블로그 서비스에서 사용되는 URL을 들 수 있다.
+워드프레스 URL은 다음 포맷을 따르고 있다:
+
 
 -   `ROOT/YYYY/MM/DD/words-of-title-separated-by-hyphens`
 -   <http://cradledincaricature.com/2015/07/24/code-control-and-making-the-argument-in-the-humanities/>
 
-A similar style is used by news agencies such as a *The Guardian* newspaper:
+가디언(*The Guardian*) 신문사와 같은 언론사도 유사한 스타일을 사용한다:
 
 -   `ROOT/SUB_ROOT/YYYY/MMM/DD/words-describing-content-separated-by-hyphens`
 -   <http://www.theguardian.com/uk-news/2014/feb/20/rebekah-brooks-rupert-murdoch-phone-hacking-trial>
 
-In data repositories, URLs structured by a single data element are often used. The National Library of Australia's TROVE uses this format:
+데이터 저장소에 단일 데이터 요소로 URL을 구성하는 경우도 흔히 존재한다. 
+국립 호주 도서관 TROVE도 이런 포맷을 사용한다:
 
 -   `ROOT/record-type/REF`
 -   <http://trove.nla.gov.au/work/6315568>
 
-The Old Bailey Online uses the format:
+`Old Bailey Online`은 다음 포맷을 사용한다:
 
 -   `ROOT/browse.jsp?ref=REF`
 -   <http://www.oldbaileyonline.org/browse.jsp?ref=OA16780417>
 
-What we learn from these examples is that a combination of semantic description and data elements make for consistent and predictable data structures that are readable both by humans and machines. Transferring this kind of pattern to your own files makes it easier to browse, to search, and to query using both the standard tools provided by operating systems and by the more advanced tools Library Carpentry will cover.
+상기 예제를 통해서 터득한 사실은 의미론적 기술과 데이터 요소를 조합하게 되면 사람이나 기계 모두 판독이 가능한 자료구조를 일관되고 예측가능하게 만들어낼 수 있다는 점이다.
+이런 유형의 패턴을 본인 파일로 이관시키면 운영체제와 도서관 카펜트리에서 다루게 되는 고급 도구를 활용해서 훑어보고(browser), 검색(search), 쿼리(query)가 한결 수월하게 된다.
 
-In practice, the structure of a good archive might look something like this:
+실무에서 훌륭한 기록 저장소 구조는 다음과 같이 생겼다:
 
-- A base or root directory, perhaps called 'work'.
-- A series of sub-directories such as 'events', 'data', ' projects' et cetera
-- Within these directories are series of directories for each event, dataset or project. Introducing a naming convention here that includes a date element keeps the information organised without the need for subdirectories by, say, year or month.
+- 루트 기준 디렉토리, 아마도 `work`.
+- 'events', 'data', ' projects'와 같은 하위 디렉토리.
+- 상기 디렉토리 내부에 각 'events', 'data', ' projects' 디렉토리. 날짜 요소를 포함하는 명명규칙을 도입하게 되면 하위 디렉토리(예를 들어 년, 월)없이 정보를 조직적으로 관리할 수 있게 된다.
 
-All this should help you remember something you were working on when you come back to it later (call it real world preservation).
+상기 작업 모두는 나중에 다시 돌아와서 다시 작업할 때 본인이 과거 작업한 것을 잘 기억할 수 있도록 도움이 된다.
+(이것을 `real world preservation`이라고 부른다.)
 
-The crucial bit for our purposes, however, is the file naming convention you choose. The name of a file is important to ensuring it and its contents are easy to identify. 'Data.xslx' doesn't fulfil this purpose. A title that describes the data does. And adding dating convention to the file name, associating derived data with base data through file names, and using directory structures to aid comprehension strengthens those connections.
+하지만, 우리가 당면한 목적을 생각하면 가장 중요한 비트는 아마도 파일명 짓는 규칙이 될 듯 싶다.
+파일명을 통해 앞서 학습한 것을 확실하게 해서 파일에 담긴 콘텐츠를 식별하기 쉽게 한다.
+'Data.xslx'는 이런 목적에 부합하지 않는다.
+데이터를 기술하는 제목은 이런 목적에 부합된다.
+즉, 이해를 돕고자 파일명에 날짜 규칙을 추가하고, 파일명을 통해 기초 데이터와 관련된 파생 데이터를 연관시키고,
+디렉토리 구조를 사용하는 일련의 작업은 이러한 연관성을 강화시키는 역할을 한다.
 
-## For further reading
 
-Andromeda Yelton, a US-based librarian, closely involved in the Code4Lib movement, put together an excellent American Library Association Library Technology Report called ["Coding for Librarians: Learning by Example."](https://thatandromeda.github.io/ltr/). In it, Yelton describes scenarios in which library professionals developed and shared code that made a difference to their work, to the work of their colleagues, and to the work of their library.
+## 추가 읽을 거리
+
+미국 도서관사서 Andromeda Yelton은 Code4Lib 운동에 깊숙이 관여하면서 ["Coding for Librarians: Learning by Example."](https://thatandromeda.github.io/ltr/)로 불리는 American Library Association Library Technology 보고서에 많은 내용을 담아냈다.
+본인 일과 다른 동료 일, 더 나아가 도서관 일에 차별점을 둘 수 있도록 도서관 전문가가 코드를 개발하고 공유하는 다양한 시나리오가 보고서 책자에 담겨있다.
