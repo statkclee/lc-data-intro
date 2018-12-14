@@ -3,67 +3,98 @@ title: "밑바탕 토대"
 teaching: 45
 exercises: 0
 questions:
-- What best practices and generic skills can be used to successfully use and create library related programs?
-- 도서관과 관련된 
+- 도서관과 관련된 프로그램을 성공적으로 생성하고 사용하는데 필요한 일반적인 기술과 좋은 관례는 어떤 것이 있을까요?
 objectives:
-- Identify best practices in using software and data
-- Identify best practices in saving files
-- Identify best practices in naming files
+- 소프트웨어와 데이터를 사용하는데 좋은 관례(best practice)를 식별한다.
+- 파일을 저장하는데 좋은 관례(best practice)를 식별한다.
+- 파일명을 짓는데 좋은 관례(best practice)를 식별한다.
 keypoints:
-- Data structures should be consistent and predictable
-- Consider using semantic elements or data identifiers to data directories
-- Fit and adapt your data structure to your work
-- Apply naming conventions to directories and file names to identify them, to create associations between data elements, and to assist  
-  with the long term readability and comprehension of your data structures
+- 자료구조는 일관성과 함께 예측가능해야 된다.
+- 데이터 디렉토리에 데이터 식별자 혹은 의미론적 요소(semantic element)를 적극 사용하는 것을 고려한다.
+- 본인 작업에 적합하도록 자료 구조를 맞추고 조정한다.
+- 파일과 디렉토리를 식별하도록 작명 규칙(naming conventions)을 적용시켜 데이터 요소간에 연관관계를 생성함으로써 
+  장기적으로 자료 구조에 대한 이해와 가독성을 높인다.
+  
 ---
 
-## Foundations
+## 밑바탕 토대
 
-Before we crack on with using the computational tools at our disposal, let's spend some time building a foundation that will help frame what you'll encounter in Library Carpentry. This lesson covers a few principles and behaviors that are useful to know when beginning to develop computational approaches to your work. 
+컴퓨팅 도구를 자유자재로 사용하기 전에,
+시간 일부를 투여해서 라이브러리 카펜트리(library carpentry)에서 마주할 것에 도움이 되는 밑바탕 토대를 살펴본다.
+본인 작업에 컴퓨팅 접근법을 도입할 때 알아두면 유용한 몇가지 원칙과 행동을 다루게 된다.
 
-### The computer is stupid
 
-It is true: The computer is stupid. However, the computer is also useful. Given a repetitive task, an enumerative task, or a task that relies on memory, it can produce results faster, more accurately, and less grudgingly than a person might. A computer only does what you tell it to. If you get an error message, it is often not your fault! In most cases the computer has failed to interpret what you mean because it can only work with what it knows. 
+### 컴퓨터는 멍청하다.
+
+자명한 사실로 정말 컴퓨터는 멍청하다. 영어로 The computer is stupid.
+하지만, 컴퓨터는 유용하기도 하다. 
+반복 작업(repetitive task), 쭉 열거된 작업(enumerative task), 기억에 의존하는 작업이 주어졌을 때,
+마지못해 억지로 작업을 수행하는 사람보다 컴퓨터는 훨씬 더 빨리, 더 정확하게 작업을 수행한다.
+컴퓨터는 컴퓨터가 지시받는 바만 정확하게 수행한다.
+오류가 발생하면 잘못은 바로 작업을 내린 당신이다. 즉, 당신 머리속에 버그가 있는 것이다.
+대부분의 경우 컴퓨터가 의도한 바를 잘못 이해하는 경우가 있는데 이유는 컴퓨터는 원래 자신이 아는 한도내에서 동작하기 때문이다.
+
 
 ### Why take an automated or computational approach?
 
-Otherwise known as the 'why not do it manually?' question. There are plenty of times when manual work is the easiest, fastest and most efficient approach. Here are two conditions that should make you consider using automation: 
- - You know how to automate the task
- - You think this is a task you will do over and over again
+### 자동화 즉 컴퓨팅 접근법을 취하는 이유는 뭘까?
 
-Main lessons:
+다른 말로 바꾸게 되면, "수작업으로 못 할 이유는 뭘까?"라는 질문과 같다.
+문제에 대해서 수작업이 훨씬 더 쉽고, 빠르고, 가장 효율적인 접근법이 되는 경우도 무척이나 많다.
+**자동화(automation)**, 즉 컴퓨팅 접근법(computational approach)을 고려해야되는 조건 두가지는 다음과 같다:
 
-- **Borrow, borrow, and borrow again**. This is a mainstay of programming and a practice common to all skill levels, from professional programmers to people like us hacking around in libraries;
-- **The correct language to learn is the one that works in your local context**. There truly isn't a best language, just languages with different strengths and weaknesses, all of which incorporate the same fundamental principles;
-- **Consider the role of programming in professional development**. Computational skills improve your efficiency and effectivness. Stay alert to skills you want to learn, and be aware of what skills you can make sure your staff learn, as well. 
-- **Knowing (even a little) code helps you evaluate projects that use code**. Programming can seem alien. Knowing some code makes you better at judging the quality of software development or planning activities that include software development.
-- **Automate to make the time to do something else!** Taking the time to gather together even the most simple programming skills can save time to do more interesting stuff! (even if often that more interesting stuff is learning more programming skills ...)
+ - 본인이 작업 자동화 방법을 알고 있는 경우.
+ - 본인이 알기로 본인이 반복해서 계속해야 되는 작업인 경우.
 
-**Why automate?**
+주요 수업내용:
 
-![Is it worth the time](../assets/img/is_it_worth_the_time.png)
+- **빌리고, 빌리고, 또 빌려라.**. 전문직업 프로그래머부터 도서관에서 코딩하는 우리와 같은 일반인 모두에게 공통되는 프로그래밍의 중심;
+- **배워야 되는 적합한 언어는 본인 작업 맥락에서 동작하는 것이다.** 진정한 최고 언어는 없고 단지 서로 다른 장점과 단점을 갖는 언어만 있을 뿐이다.
+    하지만, 프로그래밍 언어 모두는 동일한 토대가 되는 원칙은 채택하고 있다;
+- **전문개발 측면에서 프로그래밍의 역할을 고려하라.** 컴퓨팅 기술은 효율성과 함께 효과성도 증진시킨다. 학습하고자 하는 기술에 집중하고 함께하는 직원들이 어떤 기술을 습득하는지도 숙지한다;
+- **코드를 (조금이라도) 알게되면 코드를 사용하는 프로젝트를 평가하는데 도움이 된다.** 프로그래밍이 외계인처럼 보일 수 있지만, 코드를 알게 되면 소프트웨어 개발 품질을 판단하고 소프트웨어 개발이 포함된 활동을 계획하는데 도움을 줄 수 있다;
+- **다른 무언가를 할 수 있도록 시간을 벌 수 있도록 자동화하라!** 시간을 들여서라도 한 곳에 모아라. 가장 단순한 프로그래밍 기술도 더 흥미진지한 작업을 수행하는데 상당한 시간을 절약해 줄 수 있다!(더 흥미로운 작업은 더 많은 프로그래밍 기술을 학습할지라도 ...)
 
-'Is it worth the time?' by Randall Munroe available at [https://xkcd.com/1205/](https://xkcd.com/1205/) under a Creative Commons Attribution-NonCommercial 2.5 License.
 
-### Keyboard shortcuts are your friend
+**왜 자동화하는가?**
 
-Though we will get more computational over the course of the programme, we can start our adventure into programming - as many of you will have already - with very simple things like keyboard shortcuts. We all have our favourites, that are labour saving but also allow us to use this stupid machine in the best possible way. You can do all the lessons in Library Carpentry without keyboard shortcuts, but note that they'll likely come up a lot.
+![그럴만한 가치가 있나?](../assets/img/is_it_worth_the_time.png)
 
-Action | Windows | Mac | + Keystroke
+Randall Munroe가 저작한 '그럴만한 가치가 있나(Is it worth the time)?', CC-BY-NC 2.5 라이선스 [https://xkcd.com/1205/](https://xkcd.com/1205/).
+
+### 키보드 단축키가 여러분의 친구입니다.
+
+프로그래밍 과정을 통해 더 많은 컴퓨팅 기술을 얻게 되지만, 매우 단순한 키보드 단축키부터 차분히 시작한다.
+여러분 모두 호불호를 명확한 단축키 사용법을 익혀서 노동력을 절약하기도 하지만 멍청한 컴퓨터를 가장 최선의 방식으로 활용하게도 하는 역할을 한다.
+키보드 단축키 없이도 도서관 카펜트리 모든 학습을 수행할 수 있지만 단축키는 참 많이 활용될 것이 분명하다.
+
+
+동작 | 윈도우 | 맥 | + 키보드 누름(Keystroke)
 --- | --- | --- | --- |
-Save | <kbd>Ctrl</kbd> | <kbd>Command</kbd> | + <kbd>S</kbd>
-Copy | <kbd>Ctrl</kbd> | <kbd>Command</kbd> | + <kbd>C</kbd>
-Cut | <kbd>Ctrl</kbd> | <kbd>Command</kbd> | + <kbd>X</kbd>
-Paste | <kbd>Ctrl</kbd> | <kbd>Command</kbd> | + <kbd>V</kbd>
-Switch Applications | <kbd>Alt</kbd> | <kbd>Command</kbd> | <kbd>Tab</kbd> | 
+저장(Save) | <kbd>Ctrl</kbd> | <kbd>Command</kbd> | + <kbd>S</kbd>
+복사(Copy) | <kbd>Ctrl</kbd> | <kbd>Command</kbd> | + <kbd>C</kbd>
+잘라내기(Cut) | <kbd>Ctrl</kbd> | <kbd>Command</kbd> | + <kbd>X</kbd>
+붙여넣기(Paste) | <kbd>Ctrl</kbd> | <kbd>Command</kbd> | + <kbd>V</kbd>
+응용프로그램 바꿈(Switch Applications) | <kbd>Alt</kbd> | <kbd>Command</kbd> | <kbd>Tab</kbd> | 
 
-### Plain text formats are your friend
+### 일반 텍스트 파일형식도 여러분 친구입니다.
 
-Why? Because computers can process them!
+왜냐구요? 컴퓨터가 텍스트를 처리할 수 있기 때문입니다!
 
-If you want computers to be able to process your stuff, try to get in the habit where possible of using platform-agnostic formats such as .txt for notes and .csv (comma-separated values) or .tsv (tab-separated values) for tabular data. TSV and CSV files are both spreadsheet formats. These plain text formats are preferable to the proprietary formats (e.g., Microsoft Word)  because they can be opened by many software packages and have a strong chance of remaining viewable and editable in the future. Most standard office suites include the option to save files in `.txt`, `.csv`, and `.tsv` formats, meaning you can continue to work with familiar software and save your files in the more perennial formats. Compared to `.doc` or `.xls`, these formats have the additional benefit of containing only machine-readable elements. 
+컴퓨터로 본인 작업을 처리하게 하려면, 
+일반 평문 텍스트의 경우 `.txt`, 콤마 구분자 `.csv`, 탭 구분자 `.tsv` 표형식 데이터의 경우처럼 플랫폼에 구애받지 않는 것을 사용하도록 습관을 들여라.
+TSV와 CSV 파일 모두 스프레드쉬트 형식이다. 이러한 일반 평문 텍스트 형식이 상용형식(예를 들면 마이크로소프트 워트)보다 선호되는 이유는 
+대다수 소프트웨어 팩키지에서 열어 볼 수 있고, 향후 계속해서 열어 볼수도 있고 편집도 가능하기 때문이다.
+대부분의 표준 오피스 제품에는 `.txt`, `.csv`, `.tsv` 파일형식으로 파일을 저장할 수 있는 선택옵션을 포함하고 있습니다.
+이것이 의미하는 바는 친숙한 소프트웨어로 계속해서 작업할 수 있음을 의미한다.
+`.doc` 혹은 `.xls`와 비교하여 기계판독 가능한 요소만 포함하고 있다는 부가적인 좋은 점도 있다.
 
-When working with files for automation or computational purposes, it is more important to focus on meaningful transmission of data as opposed to fancy formatting. Whilst using bold, italics, and colouring to signify headings or to make a visual connection between data elements is common practice, these display-orientated annotations are not (easily) machine-readable and hence can neither be queried and searched nor are appropriate for large quantities of information. One rule of thumb is if you can't find it by <kbd>Ctrl</kbd>+<kbd>F</kbd>/<kbd>Command</kbd>+<kbd>F</kbd> it isn't machine readable. Preferable are simple notation schemes such as using a double-asterisk or three hashes to represent a data feature: for example, we could use three question marks to indicate something that needs follow up, chosen because `???` can easily be found with a <kbd>Ctrl</kbd>+<kbd>F</kbd>/<kbd>Command</kbd>+<kbd>F</kbd> search.
+자동화 즉, 컴퓨팅 목적으로 파일작업을 수행할 때, 멋짓 외양보다는 유의미한 데이터 전송에 집중하는 것이 더 중요하다.
+굵은 글씨, 이탤릭, 색상을 주어 제목을 돋보이게 하거나 데이터 요소간에 시각적 연결을 만들 수 있지만, 이러한 표시지향 표식은 쉽게
+기계판독이 되지 않아서 쿼리하거나 검색이 되지 않아서 대량의 정보로는 부적절하다.
+한가지 경험 법칙은 <kbd>F</kbd>/<kbd>Command</kbd>+<kbd>F</kbd>으로 찾을 수 없으면 기계판독은 되지 않는 것으로 간주된다.
+별표(`*`) 두개 혹은 해쉬(`#`) 3개를 사용해서 데이터 기능을 표현하는 단순한 표기법이 더 선호된다;
+예를 들어, 의문부호 3개를 사용해서 추적할 무언가를 나타내는 경우가 있다. 왜 `???`을 골랐나면 <kbd>Ctrl</kbd>+<kbd>F</kbd>/<kbd>Command</kbd>+<kbd>F</kbd>으로 쉽게 검색할 수 있기 때문이다.
 
 ### Use machine readable plain text notation for formatting
 There are some simple notation schemes that are also plain text and machine readable, but can be used to render simple formatting. One such scheme is called Markdown, a lightweight markup language. A markup language is a a metadata language that uses notation to distinguish between the content and the formatting of the content. Markdown files, which use the file extension `.md`, are machine readable, human readable, and used in many contexts - for example, GitHub renders text via Markdown. An excellent [Markdown cheat sheet is available on GitHub](https://github.com/adam-p/markdown-here) for those who wish to follow – or adapt – this existing schema. 
