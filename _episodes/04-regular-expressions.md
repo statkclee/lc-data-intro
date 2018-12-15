@@ -35,41 +35,47 @@ keypoints:
 예를 들어, 지역코드를 감싼 괄호를 제거해서 웹사이트에 전화번호 표시방법을 바꾸는 경우를 가정해보자.
 전화번호 전부를 찾거나 (상당히 시간이 많이 걸리고 실수하기 쉽다.) 여는 괄호 문자를 전수 조사하는 것(상당히 시간도 많이 걸리고 거짓 양성이 많을 수 있음)보다 전화번호 패턴을 찾는 것도 방법이다.
 
-Since regular expressions defines some ASCII characters as "metacharacters" that have more than their literal meaning, it is also important to be able to "escape" these metacharacters to use them for their normal, literal meaning. For example, the period (\.) means "match any character", but if you want to match a period (\.) then you will need to use a "\" in front of it to signal to the regular expression processor that you want to use the period as a plain old period and not a metacharacter. That notation is called "escaping" the special character. The concept of "escaping" special characters is shared across a variety of computational settings, including markdown and HTML.  
+정규표현식에는 일부 ASCII 문자를 문자 그대로 의미를 갖는 이상의 "메타문자"로 정의한다. 
+따라서, 메타문자를 문자 그대로 사용하려면 메타문자에서 탈출(escape)시키는 것이 필요하다.
+예를 들어 마침표(`.`)은 "모든 문자와 일치시켜라(match any character)"를 의미해서 마침표(`.`)를 매칭시키고자 하는 경우,
+마침표 앞에 `\`을 사용해서 정규표현식에 다음 사실을 알려야 한다; 마침표를 메타문자가 아니라 문자 그대로 마침표로 사용함.
+이러한 표기법은 특수 문자 탈출(`escape`)이라고 불린다. 특수 문자를 탈출(escape)시키는 개념은 
+마크다운과 HTML을 포함한 다양한 컴퓨팅 환경에서 공유되기도 한다.
 
+매우 단순한 정규표현식 사용례로 동일한 단어로 두가지 방식으로 철자가 적힌 곳을 찾아내는 것을 들 수 있다.
+예를 들어 정규표현식 `organi[sz]e`은 "organise"와 "organize"을 동시에 매칭해서 찾아낸다.
+하지만, `reorganise`, `reorganize`, `organises`, `organizes`, `organised`, `organized` 등등도 매칭시키기도 한다.
 
+### 많이 사용되는 정규표현식 메타문자 학습
 
-A very simple use of a regular expression would be to locate the same word spelled two different ways. For example the regular expression `organi[sz]e` matches both "organise" and "organize". But it would also match `reorganise`, `reorganize`, `organises`, `organizes`, `organised`, `organized`, etc.
+꺾쇠를 사용하면 문자 범위와 목록을 정의해서 패턴을 구성할 수 있다. 그래서:
 
-### Learning common regex metacharacters
-Square brackets can be used to define a list or range of characters to be found. So:
+- `[ABC]` A 혹은 B 혹은 C를 매칭시킨다.
+- `[A-Z]` 임의 대문자를 매칭시킨다.
+- `[A-Za-z]` 대문자 혹은 소문자를 매칭시킨다.
+- `[A-Za-z0-9]` 대문자 혹은 소문자 혹은 숫자를 매칭시킨다.
 
-- `[ABC]` matches A or B or C
-- `[A-Z]` matches any upper case letter
-- `[A-Za-z]` matches any upper or lower case letter
-- `[A-Za-z0-9]` matches any upper or lower case letter or any digit
+다음도 있다:
 
-Then there are:
+- `.` 임의 문자를 매칭시킨다.
+- `\d` 임의 숫자 하나를 매칭시킨다.
+- `\w` 임의 단어 문자를 매칭시킨다. (`[A-Za-z0-9]`와 동일)
+- `\s` 임의 공백, 탭, 개행(newline)을 매칭시킨다.
+- `\` 문자을 사용해서 해당 문자가 특수 문자일 때 해당문자를 탈출(escape)시킨다. 예를 들어, `.com`을 찾는 정규표현식을 구성하는 경우 `\.com`와 같이 작성하는데 이유는 `.`이 임의 문자를 매칭시키는 특수문자이기 때문이다.
+- `^` 문자는 행의 시작 위치를 표현한다. 따라서, 캐럿(caret)문자 다음에 오는 것은 행의 첫번째 문자인 경우만 매칭된다. 캐럿은 `circumflex`로도 알려져 있다.
+- `$` 문자는 행의 끝 위치를 표현한다. 따라서 `$`문자 앞에 오는 것은 행의 마지막 문자인 경우만 매칭된다.
+- `\b` 문자는 단어 경계를 추가한다. `\b` 문자를 단어 어는 쪽이든 위치시키면 정규표현식으로 하여금 변형된 더 긴 단어와 매칭되는 것을 중지시키게 한다. 따라서;
+	- 정규표현식 `foobar` 은 `foobar` `666foobar`, `foobar777`, `8thfoobar8th` 등을 매칭시킨다.
+	- 정규표현식 `\bfoobar` 은 `foobar`, `foobar777` 등을 매칭시킨다.
+	- 정규표현식 `foobar\b` 은 `foobar`, `666foobar` 등을 매칭시킨다.
+	- 정규표현식 `\bfoobar\b` 은 `foobar` 을 매칭시키지만, `666foobar`, `foobar777` 등은 매칭되지 않는다.
 
-- `.` matches any character
-- `\d` matches any single digit
-- `\w` matches any part of word character (equivalent to `[A-Za-z0-9]`)
-- `\s` matches any space, tab, or newline
-- `\` used to escape the following character when that character is a special character. So, for example, a regular expression that found `.com` would be `\.com` because `.` is a special character that matches any character.
-- `^` asserts the position at the start of the line. So what you put after the caret will only match if they are the first characters of a line. The caret is also known as a circumflex.
-- `$` asserts the position at the end of the line. So what you put before it will only match if they are the last characters of a line.
-- `\b` adds a word boundary. Putting this either side of a word stops the regular expression matching longer variants of words. So:
-	- the regular expression `foobar` will match `foobar` and find `666foobar`, `foobar777`, `8thfoobar8th` et cetera
-	- the regular expression `\bfoobar` will match `foobar` and find `foobar777`
-	- the regular expression `foobar\b` will match `foobar` and find `666foobar`
-	- the regular expression `\bfoobar\b` will find `foobar` but not `666foobar` or `foobar777`
+그렇다면 `^[Oo]rgani.e\b`이 매칭시키는 것은 무엇일까?
 
-So, what is `^[Oo]rgani.e\b` going to match?
-
-> ## Using special characters in regular expression matches
-> What will the regular expression `^[Oo]rgani.e\b` match?
+> ## 경규표현식에 특수 문자를 사용해서 매칭시키기
+> 정규표현식 `^[Oo]rgani.e\b`이 매칭시키는 것은 무엇일까?
 >
-> > ## Solution
+> > ## 해답
 > > ~~~
 > > organise
 > > organize
@@ -78,256 +84,280 @@ So, what is `^[Oo]rgani.e\b` going to match?
 > > organife
 > > Organike
 > > ~~~
-> > Or, any other string that starts a line, begins with a letter `o` in lower or capital case, proceeds with `rgani`, has any character in the 7th position, and ends with the letter `e`.
+> > 즉, `o` 혹은 대문자 `O`로 시작하는 행을 먼저 매칭시키고, `rgani`이 다음에 위치하고 7번째 위치에는 임의 어떤 문자도 상관이 없고, `e` 문자로 끝나는 문자열만 매칭시킨다.
 > {: .solution}
 {: .challenge}
 
-Other useful special characters are:
+기타 유용한 특수 문자는 다음과 같다:
 
-- `*` matches the preceding element zero or more times. For example, ab*c matches "ac", "abc", "abbbc", etc.
-- `+` matches the preceding element one or more times. For example, ab+c matches "abc", "abbbc" but not "ac".
-- `?` matches when the preceding character appears zero or one time.
-- `{VALUE}` matches the preceding character the number of times defined by VALUE; ranges, say, 1-6, can be specified with the syntax `{VALUE,VALUE}`, e.g. `\d{1,9}` will match any number between one and nine digits in length.
-- `|` means or.
-- `/i` renders an expression case-insensitive (equivalent to `[A-Za-z]`)
+- `*` 문자는 선행요소를 0번 혹은 그 이상 매칭시킨다. 예를 들어, `ab*c` 은 "ac", "abc", "abbbc", 등을 매칭시킨다..
+- `+` 문자는 선행요소를 한번 이상 매칭시킨다. 예를 들어, `ab+c` 은  "abc", "abbbc"은 매칭시키지만, "ac"은 매칭시키지 않는다.
+- `?` 문자는 선행문자가 0번 혹은 1번 출현될 때만 매칭시킨다.
+- `{VALUE}` 정규표현식은 VALUE로 정의된 횟수만큼 선행문자를 매칭시킨다; 가령 1-6 범위를 `{VALUE,VALUE}` 구문으로 명세할 수 있다. 예를 들어, 
+  `\d{1,9}` 정규표현식은 1에서 9사이 임의 숫자를 매칭시키게 된다. 
+- `|` 문자는 "또는" 을 의미한다.
+- `/i` 정규표현식은 대소문자 구분하지 않음을 의미한다. (`[A-Za-z]`와 동일)
 
-So, what are these going to match?
+
+그렇다면, 다음 정규표현식이 매칭하는 것은 무엇일까요?
 
 > ## ^[Oo]rgani.e\w*
-> What will the regular expression `^[Oo]rgani.e\w*` match?
+> 정규표현식 `^[Oo]rgani.e\w*` 구문이 매칭하는 것은 무엇일까요?
 >
-> > ## Solution
+> > ## 해답
 > > ~~~
 > > organise
 > > Organize
 > > organifer
 > > Organi2ed111
 > > ~~~
-> > Or, any other string that starts a line, begins with a letter `o` in lower or capital case, proceeds with `rgani`, has any character in the 7th position, follows with letter `e` and zero or more characters from the range `[A-Za-z0-9]`.
+> > 즉, `o` 혹은 대문자 `O`로 시작하는 행을 먼저 매칭시키고, `rgani`이 다음에 위치하고 7번째 위치에는 임의 어떤 문자도 상관이 없고, `e` 문자가 그 다음에 위치하고,
+> > `[A-Za-z0-9]` 범위 문자가 0번 이상 출현하면 된다.
 > {: .solution}
 {: .challenge}
 
 > ## [Oo]rgani.e\w+$
-> What will the regular expression `[Oo]rgani.e\w+$` match?
+> 정규표현식 `[Oo]rgani.e\w+$` 구문이 매칭하는 것은 무엇일까요?
 >
-> > ## Solution
+> > ## 해답
 > > ~~~
 > > organiser
 > > Organized
 > > organifer
 > > Organi2ed111
 > > ~~~
-> > Or, any other string that ends a line, begins with a letter `o` in lower or capital case, proceeds with `rgani`, has any character in the 7th position, follows with letter `e` and **at least one or more** characters from the range `[A-Za-z0-9]`.
+> > 즉, `o` 혹은 대문자 `O`로 시작하는 행을 먼저 매칭시키고, `rgani`이 다음에 위치하고 7번째 위치에는 임의 어떤 문자도 상관이 없고, `e` 문자가 그 다음에 위치하고,
+> > `[A-Za-z0-9]` 범위 문자가 **적어도 한번 이상** 출현해야 된다.
 > {: .solution}
 {: .challenge}
 
 > ## ^[Oo]rgani.e\w?\b
-> What will the regular expression `^[Oo]rgani.e\w?\b` match?
+> 정규표현식 `^[Oo]rgani.e\w?\b` 구문이 매칭하는 것은 무엇일까요?
 >
-> > ## Solution
+> > ## 해답
 > > ~~~
 > > organise
 > > Organized
 > > organifer
 > > Organi2ek
 > > ~~~
-> > Or, any other string that starts a line, begins with a letter `o` in lower or capital case, proceeds with `rgani`, has any character in the 7th position, follows with letter `e`, and ends with **zero or one** characters from the range `[A-Za-z0-9]`.
+> > 즉, `o` 혹은 대문자 `O`로 시작하는 행을 먼저 매칭시키고, `rgani`이 다음에 위치하고 7번째 위치에는 임의 어떤 문자도 상관이 없고, `e` 문자가 그 다음에 위치하고,
+> > `[A-Za-z0-9]` 범위 문자가 **0 혹은 1번** 문자로 끝나면 된다.
 > {: .solution}
 {: .challenge}
 
 > ## ^[Oo]rgani.e\w?$
-> What will the regular expression `^[Oo]rgani.e\w?$` match?
+> 정규표현식 `^[Oo]rgani.e\w?$` 구문이 매칭하는 것은 무엇일까요?
 >
-> > ## Solution
+> > ## 해답
 > > ~~~
 > > organise
 > > Organized
 > > organifer
 > > Organi2ek
 > > ~~~
-> > Or, any other string that starts and ends a line, begins with a letter `o` in lower or capital case, proceeds with `rgani`, has any character in the 7th position, follows with letter `e` and **zero or one characters** from the range `[A-Za-z0-9]`.
+> > 즉, `o` 혹은 대문자 `O`로 시작하는 행을 먼저 매칭시키고, `rgani`이 다음에 위치하고 7번째 위치에는 임의 어떤 문자도 상관이 없고, `e` 문자가 그 다음에 위치하고,
+> > `[A-Za-z0-9]` 범위에서 나온 문자가 **0 혹은 1번** 출현되야 한다.
 > {: .solution}
 {: .challenge}
 
 > ## \b[Oo]rgani.e\w{2}\b
-> What will the regular expression `\b[Oo]rgani.e\w{2}\b` match?
+> 정규표현식 `\b[Oo]rgani.e\w{2}\b` 구문이 매칭하는 것은 무엇일까요?
 >
-> > ## Solution
+> > ## 해답
 > > ~~~
 > > organisers
 > > Organizers
 > > organifers
 > > Organi2ek1
 > > ~~~
-> > Or, any other string that begins with a letter `o` in lower or capital case after a word boundary, proceeds with `rgani`, has any character in the 7th position, follows with letter `e`, and ends with **two** characters from the range `[A-Za-z0-9]`.
+> > 즉, 단어 경계 다음에 `o` 혹은 대문자 `O`로 시작하는 행을 먼저 매칭시키고, `rgani`이 다음에 위치하고 7번째 위치에는 임의 어떤 문자도 상관이 없고, `e` 문자가 그 다음에 위치하고,
+> > `[A-Za-z0-9]` 범위에서 나온 문자가 **2번** 출현되야 한다.
 > {: .solution}
 {: .challenge}
 
 > ## \b[Oo]rgani.e\b|\b[Oo]rgani.e\w{1}\b
-> What will the regular expression `\b[Oo]rgani.e\b|\b[Oo]rgani.e\w{1}\b` match?
+> 정규표현식 `\b[Oo]rgani.e\b|\b[Oo]rgani.e\w{1}\b` 구문이 매칭하는 것은 무엇일까요?
 >
-> > ## Solution
+> > ## 해답
 > > ~~~
 > > organise
 > > Organi1e
 > > Organizer
 > > organifed
 > > ~~~
-> > Or, any other string that begins with a letter `o` in lower or capital case after a word boundary, proceeds with `rgani`, has any character in the 7th position, and end with letter `e`, or any other string that begins with a letter `o` in lower or capital case after a word boundary, proceeds with `rgani`, has any character in the 7th position, follows with letter `e`, and ends with a single character from the range `[A-Za-z0-9]`.
 > {: .solution}
 {: .challenge}
 
-This logic is useful when you have lots of files in a directory, when those files have logical file names, and when you want to isolate a selection of files. It can a be used for looking at cells in spreadsheets for certain values, or for extracting some data from a column of a spreadsheet to make  new columns. I could go on. The point is, it is useful in many contexts. To embed this knowledge we won't - however - be using computers. Instead we'll use pen and paper. 
+이런 로직이 유용한 경우는 디렉토리에 파일이 아주 많을 때, 파일이 논리적인 파일명을 갖고 있는 경우, 파일 일부에 대해서 격리작업을 수행할 때가 이에 해당된다.
+스프레드쉬트 셀에서 특정 값을 찾거나 새로운 칼럼을 생성할 때 스프레드쉬트 칼럼에서 데이터 일부를 추출할 때도 유용하다.
+중요한 것은 많은 경우에 대단히 유용하다는 것이다.
+그런데, 이런 지식을 내재화하는데 컴퓨터를 사용하지 않고 종이와 연필을 사용할 것이다.
 
 
-### Exercise
+### 연습문제
 
 Work in teams of 4-6 on the exercises below. When you think you have the right answer, check it against the solution. 
+아래 연습문제를 해결하는데 4-6명이 팀을 이뤄 진행한다. 정답을 도출했다고 판단되면 `해답`을 열어본다. 
 
-When you finish, split your team into two groups and write each other some tests. These should include a) strings you want the other team to write regex for and b) regular expressions you want the other team to work out what they would match. 
+연습문제를 모두 풀게되면 팀을 두 그룹으로 나눠서 서로에게 정규표현식 문제를 만들어 준비한다.
+연습문제에는 a) 상대팀이 작성해야 되는 대상 문자열과 함께 b) 상대팀이 작성해야 되는 정규표현식이 담겨져야 한다.
 
-Then test each other on the answers. If you want to check your logic, use [regex101](https://regex101.com/), [myregexp](http://myregexp.com/), or [regex pal](http://www.regexpal.com/) [regexper.com](http://regexper.com/): the first three help you see what text your regular expression will match, the latter visualises the workflow of a regular expression.
+그리고 나서 상대방의 정답과 확인한다. 
+정규표현식 로직이 맞는 확인하려면 [regex101](https://regex101.com/), [myregexp](http://myregexp.com/), [regex pal](http://www.regexpal.com/), [regexper.com](http://regexper.com/)을 참조한다; 첫 3개 사이트는 작성한 정규표현식이 매칭하는 문자열을 확인하는데 도움이 되고, 마지막은 정규표현식 동작 흐름을 시각적으로 파악할 수 있게 도움을 줄 수도 있다.
 
-> ## Using square brackets
-> What will the regular expression `Fr[ea]nc[eh]` match?
+
+> ## 꺾쇠 괄호 사용
+> 정규표현식 `Fr[ea]nc[eh]` 구문이 매칭하는 것은 무엇일까요?
 >
-> > ## Solution
+> > ## 해답
 > > ~~~
 > > French
 > > France
 > > Frence
 > > Franch
 > > ~~~
-> > This will also find words where there are characters either side of the solutions above, such as `Francer`, `foobarFrench`, and `Franch911`.
+> > 해답 앞뒤로 `Francer`, `foobarFrench`, `Franch911`와 같은 단어도 매칭으로 찾아낸다.
 > {: .solution}
 {: .challenge}
 
-> ## Using dollar signs
-> What will the regular expression `Fr[ea]nc[eh]$` match?
+> ## 달러 기호 사용하기
+> 정규표현식 `Fr[ea]nc[eh]$` 구문이 매칭하는 것은 무엇일까요?
 >
-> > ## Solution
+> > ## 해답
 > > ~~~
 > > French
 > > France
 > > Frence
 > > Franch
 > > ~~~
-> > This will also find strings at the end of a line. It will find words where there were characters before these, for example `foobarFrench`.
+> > 행 끝에 위치한 문자열을 찾아낸다. `foobarFrench`와 같이 앞에 문자가 붙은 단어도 검출해 낸다.
 > {: .solution}
 {: .challenge}
 
-> ## Introducing options
-> What would match the strings `French` and `France` that appear at the beginning of a line?
+> ## 선택옵션 도입
+> 행 시작지점에 `French`, `France` 문자열과 매칭되는 정규표현식을 작성하시오?
 >
-> > ## Solution
+> > ## 해답
 > > ~~~
 > > ^France|^French
 > > ~~~
-> > This will also find words where there were characters after `French` such as `Frenchness`.
+> > `Frenchness`처럼 `French` 다음에 오는 문자도 매칭에 포함된다.
 > {: .solution}
 {: .challenge}
 
-> ## Case insensitivity
-> How do you match the whole words `colour` and `color` (case insensitive)?
+> ## 대소문자 구분하지 않음
+> `colour` , `color` 같이 (대소문자 구분하지 않음) 전체 단어 전체를 매칭하는 정규표현식을 어떻게 작성하는가?
 >
-> > ## Solutions
+> > ## 해답
 > > ~~~
 > > \b[Cc]olou?r\b|\bCOLOU?R\b
 > > /colou?r/i
 > > ~~~
-> > In real life, you *should* only come across the case insensitive variations `colour`, `color`, `Colour`, `Color`, `COLOUR`, and `COLOR` (rather than, say, `coLour`). So based on what we know, the logical regular expression is `\b[Cc]olou?r\b|\bCOLOU?R\b`. An alternative more elegant option we've not discussed is to take advantage of the `/` delimiters and add an 'ignore case' flag: so `/colou?r/i` will match all case insensitive variants of `colour` and `color`.
+> > 실무에서, 대소문자를 구분하지 않는 변형 `colour`, `color`, `Colour`, `Color`, `COLOUR`, `COLOR`이 떠오르지만, `coLour` 유형은 해당되지 않는다.
+> > 따라서 지금까지 학습한 것에 기초하여, 나름 합리적인 정규표현식은 `\b[Cc]olou?r\b|\bCOLOU?R\b`와 같이 작성할 수 있다.
+> > 지금까지 논의하지 않은 좀더 우아한 선택 옵션은 `/` 구분자를 사용해서 대소문자 구분을 무시하는 플래그를 추가하는 방법이 있다:
+> > `/colou?r/i` 정규표현식은 `colour`,  `color` 단어 대해서 대소문자 구분하지 않고 모두 매칭시킨다.
 > {: .solution}
 {: .challenge}
 
-> ## Word boundaries
-> How would you find the whole word `headrest` and or `head rest` but not `head  rest` (that is, with two spaces between `head` and `rest`?
+> ## 단어 경계 
+> 전체 단어 `headrest`, `head rest`는 매칭시키지만 `head  rest` 처럼 `head`와 `rest` 공백이 두개 들어간 것은 제외시키는 정규표현식은 어떻게 작성하는가?
 >
-> > ## Solution
+> > ## 해답
 > > ~~~
 > > \bhead ?rest\b
+> > \bheadrest\b|\bhead\srest\b
 > > ~~~
-> > Note that although `\bhead\s?rest\b` does work, it will also match zero or one tabs or newline characters between `head` and `rest`. So again, although in most real world cases it will be fine, it isn't strictly correct.
+> > `\bhead\s?rest\b` 정규표현식을 통해 매칭이 잘 구현되었지만, `head`와 `rest` 사이 0번 혹은 1회 탭/개행문자를 매칭시킬 수 있다.
+> > 그래서, 실무에서 사용해도 괜찮지만, 엄밀하게 따면 옳은 정규표현식은 아니다.
 > {: .solution}
 {: .challenge}
 
-> ## Matching non-linguistic patterns
-> How would you find a string that ends with 4 letters preceded by at least one zero?
+> ## 비언어적(non-linguistic) 패턴 매칭 
+> 0 다음에 문자 4개로 끝나는 문자열을 찾아내는 패턴을 정규표현식으로 나타내시오?
 >
-> > ## Solution
+> > ## 해답
 > > ~~~
 > > 0+[A-Za-z]{4}\b
 > > ~~~
 > {: .solution}
 {: .challenge}
 
-> ## Matching digits
-> How do you match any 4-digit string anywhere?
+> ## 숫자 매칭
+> 아무 곳에서나 숫자 4개로 구성된 문자열을 매칭시키는 정규표현식을 작성하시오?
 >
-> > ## Solution
+> > ## 해답
 > > ~~~
 > > \d{4}
 > > ~~~
-> > Note: this will also match 4 digit strings within longer strings of numbers and letters.
+> > 주의: 숫자와 문자로 좀더 길게 구성된 문자열 내부 숫자 4개 문자열도 매칭시킨다.
 > {: .solution}
 {: .challenge}
 
-> ## Matching dates
-> How would you match the date format `dd-MM-yyyy`?
+> ## 날짜 매칭
+> 날짜 포맷 `dd-MM-yyyy`을 매칭시키는 정규표현식을 작성하시오?
 >
-> > ## Solution
+> > ## 해답
 > > ~~~
 > > \b\d{2}-\d{2}-\d{4}\b
 > > ~~~
-> > Depending on your data, you may chose to remove the word bounding.
+> > 작업하는 데이터 유형에 따라 단어경계(`\b`)는 제거시킬 수도 있다.
 > {: .solution}
 {: .challenge}
 
-> ## Matching multiple date formats
-> How would you match the date format `dd-MM-yyyy` or `dd-MM-yy` at the end of a line only?
+> ## 다양한 날짜 형식 매칭
+> 행 마지막에 위치한 `dd-MM-yyyy`, `dd-MM-yy` 날자 형식을 매칭시키는 정규표현식을 작성하시오?
 >
-> > ## Solution
+> > ## 해답
 > > ~~~
 > > \d{2}-\d{2}-\d{2,4}$
 > > ~~~
-> > Note this will also find strings such as `31-01-198` at the end of a line, so you may wish to check your data and revise the expression to exclude false positives. Depending on your data, you may chose to add word bounding at the start of the expression.
+> > 행 말미에 위치한 `31-01-198` 같은 문자열도 매칭시킨다. 따라서 데이터를 확인하고 이와 같은 거짓 양성(false positive)을 제거하도록 정규 표현식을 수정한다.
+> > 작업하는 데이터에 따라 정규표현식 시작부에 단어 경계(`\b`)를 추가하는 것도 가능하다.
 > {: .solution}
 {: .challenge}
 
-> ## Matching publication formats
-> How would you match publication formats such as `British Library : London, 2015` and `Manchester University Press: Manchester, 1999`?
+> ## 출판 형식 매칭
+> `British Library : London, 2015`, `Manchester University Press: Manchester, 1999` 와 같은 출판 형식(publication format)을 매칭시키는 정규표현식을 작성하시오.
 >
-> > ## Solution
+> > ## 해답
 > > ~~~
 > > .* ?: .*, \d{4}
 > > ~~~
-> > Without word boundaries you will find that this matches any text you put before `British` or `Manchester`. Nevertheless, the regular expression does a good job on the first look up and may be need to be refined on a second, depending on your data.
+> > 단어 경계 없이 `British` 혹은 `Manchester` 단어 앞에 임의 텍스트를 매칭하는 출판물을 검색할 수 있다. 
+> > 그럼에도 불구하고, 정규표현식이 첫번째 매칭에서 나름 좋은 성과를 내고 있지만, 데이터 형태에 따라서 다시 한번 정규표현식을 정교하게 할 필요도 있다.
 > {: .solution}
 {: .challenge}
 
-### Exercise Using Regex101.com
 
-For this exercise, open a browser and go to [https://regex101.com](https://regex101.com). 
+### `Regex101.com`, `https://regexr.com/`을 사용한 연습문제
 
-Open the [swcCoC.md file](https://github.com/LibraryCarpentry/lc-data-intro/tree/gh-pages/data/swcCoC.md), copy it, and paste it into the test string box.
+이번 학습에서, 브라우저를 열고, [https://regex101.com](https://regex101.com) 혹은 
+[https://regexr.com/](https://regexr.com/) 웹사이트로 이동한다.
 
-For a quick test to see if it's working, type the string `community` into the regular expression box. 
+[swcCoC.md file](https://github.com/LibraryCarpentry/lc-data-intro/tree/gh-pages/data/swcCoC.md) 파일을 열어서 복사해서 
+`Text` 혹은 `TEST STRING` 박스에 붙여넣는다.
 
-If you look in the box on the right of the screen, you see that the expression matches six instances of the string 'community' (the instances are also highlighted within the text)
+정상적으로 동작하는지 파악하기 위해서, 정규표현식 박스에 `community` 문자열을 타이핑해서 입력시킨다.
 
-> ## Taking spaces into consideration
-> Type `community `. You get three matches. Why not six?
-> > ## Solution
+화면을 살펴보면 `community` 문자열이 6번 매칭된 것이 하이라이트 강조되어 표시되어 있다.
+
+
+> ## 공백도 고려해보자.
+> `community ` 타이핑을 한다. 매칭된 것이 3개 나온다. 왜 6개가 아닐까?
+> > ## 해답
 > >
-> > The string 'community-led' matches the first search, but drops out of this result because the space does not match the character `-`. 
+> > 'community-led'는 첫 검색에서는 매칭이 되지만, 공백이 반영된 두번째 매칭에서 `-` 문자로 인해 매칭되지 않는다.
 > >
 > {: .solution}
 {: .challenge}
 
-> ## Taking any character into consideration
-> If you want to match 'community-led' by adding another regex character to the expression `community`, what would it be?
-> > ## Solution
+> ## 임의 문자도 고려해 보자
+> `community` 표현식에 'community-led'도 매칭되도록 또다른 정규표현식 문자를 추가한다면, 무엇이 될까?
+> > ## 해답
 > >
-> > It would be the `.` 
+> > 아마도 `.`, 따라서 `community.`
 > >
 > {: .solution}
 {: .challenge}
