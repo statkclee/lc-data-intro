@@ -362,212 +362,222 @@ Work in teams of 4-6 on the exercises below. When you think you have the right a
 > {: .solution}
 {: .challenge}
 
-> ## Exploring effect of expressions matching different words
-> Change the expression to `communi` you get 13 full matches of several words. Why?
-> > ## Solution
+> ## 다른 문자를 매칭하는 정규표현식의 (역)효과를 탐색
+> 정규표현식을 `communi`로 변경시키게 되면, 매칭되는 단어가 13 개가 된다. 왜 그럴까?
+> > ## 해답
 > >
-> > Because the string 'communi' is present in all of those words, including `communi`cation and `communi`ty. Because the expression does not have a word boundary, this expression would also match in`communi`cado, were it present in this text. If you want to test this, type `incommunicado` into the text somewhere and see if it is found.
+> > 원인은 'communi' 문자열이 `communi`cation 과 `communi`ty 를 포함하는 단어에 모두 담겨있기 때문이다.
+> > 정규표현식에 단어 경계(`\b`)가 없기 때문에 `communi`cado 단어도 텍스트에 포함된 경우 매칭시킨다.
+> > `incommunicado`을 텍스트 박스 아무곳에 타이핑하면, 정규표현식이 이 단어를 매칭시키는지 확인해보라.
+> {: .solution}
+{: .challenge}
+
+> ## 대문자도 고려해보자
+> `[Cc]ommuni` 정규표현식을 타이핑하면, 14개만 매칭된다. 이유는 무엇일까?
+> > ## 해답
+> >
+> > 단어 Community가 대문자 `C`와 소문자 `c`로 14번 텍스트에 출현한다.
 > >
 > {: .solution}
 {: .challenge}
 
-> ## Taking capitalization into consideration
-> Type the expression `[Cc]ommuni`. You get 14 matches. Why?
-> > ## Solution
+> ## 위치를 특정하는 정규표현식 문자
+> `^[Cc]ommuni` 정규표현식을 타이핑하면 매칭되는 결과가 하나도 없다. 왜일까?
+> > ## 해답
 > >
-> > The word Community is present in the text with a capital `C` and with a lowercase `c` 14 times.
-> >
-> {: .solution}
-{: .challenge}
-
-> ## Regex characters that indicate location
-> Type the expression ^[Cc]ommuni. You get no matches. Why?
-> > ## Solution
-> >
-> > There is no matching string present at the start of a line. Look at the text and replace the string after the `^` with something that matches a word at the start of a line. Does it find a match?
+> > 행 시작지점에 매칭되는 문자열은 하나도 없다. 텍스트를 읽어보고, `^` 뒤에 문자열을 행시작지점에 출현하는 단어로 교체해보라. 
+> > 문자열이 매칭되어 검색이 되는가?
 > >
 > {: .solution}
 {: .challenge}
 
-> ## Finding plurals
-> Find all of the words starting with Comm or comm that are plural.
+> ## 복수형 찾아내기
+> 복수형을 갖는 `Comm` 혹은 `comm` 문자열로 시작되는 모든 단어를 찾아내보자.
 > > ## Solution
 > > ~~~
 > > [Cc]omm\w+s\b
 > > ~~~
-> > `[Cc]` finds capital and lowercase `c`
+> > `[Cc]` 표현식은 대소문자 `c`를 검출해낸다.
 > >
-> > `omm` is straightforward character matches
+> > `omm` 은 매칭되는 직접적인 문자열.
 > >
-> > `\w+` matches the preceding element (a word character) one or more times
+> > `\w+` 앞선 원소(단어 문자)를 한번 이상 매칭시킨다.
 > >
-> > `s` is a straightforward character match
+> > `s` 은 매칭되는 직접적인 문자열.
 > >
-> > `\b` ensures the 's' is located at the end of the word.
-> >
-> {: .solution}
-{: .challenge}
-
-### Exercise finding Email addresses, Using regex101.com
-
-For this exercise, open a browser and go to [https://regex101.com](https://regex101.com). 
-
-Open the [swcCoC.md file](https://github.com/LibraryCarpentry/lc-data-intro/tree/gh-pages/data/swcCoC.md), copy it, and paste it into the test string box.
-
-> ## Start with what you know
-> What character do you know is held in common with all email addresses?
-> > ## Solution
-> >
-> > The '@' character.
+> > `\b` 은 단어 마지막 위치에 `s`가 위치하도록 확실히 한다.
 > >
 > {: .solution}
 {: .challenge}
 
-> ## Add to what you know
-> The string before the "@" could contain any kind of word character, special character or digit in any combination and length. How would you express this in regex? Hint: often addresses will have a dash (`-`) in them, and the dash is not included in the word character expression (`\w`). How do you capture this in the expression?
-> > ## Solution
+### 전자우편 주소를 찾아내는 연습문제 `regex101.com`을 활용
+
+이번 학습에서, 브라우저를 열고, [https://regex101.com](https://regex101.com) 혹은 
+[https://regexr.com/](https://regexr.com/) 웹사이트로 이동한다.
+
+[swcCoC.md file](https://github.com/LibraryCarpentry/lc-data-intro/tree/gh-pages/data/swcCoC.md) 파일을 열어서 복사해서 
+`Text` 혹은 `TEST STRING` 박스에 붙여넣는다.
+
+
+> ## 본인이 알고 있는 것부터 차분히 시작해보자
+> 모든 전자우편 주소에 공통으로 들어있는 문자는 무엇인가?
+> > ## 해답
+> >
+> > 골뱅이 '@' 문자.
+> >
+> {: .solution}
+{: .challenge}
+
+> ## 본인이 알고 있는 것을 추가하자.
+> "@" 앞에 문자열이 임의 단어 문자, 특수 문자, 숫자가 다양한 길이로 조합되어 표현된다.
+> 정규표현식으로 어떻게 표현할 수 있을까?
+> 힌트: 전자우편 주소에 대쉬(`-`)가 포함되는데, 단어문자 표현식(`\w`)에는 대쉬가 포함되어 있지 않다.
+> 따라서 이점을 정규표현식에 어떻게 반영하여 전자우편주소를 추출할 수 있을까?
+> 
+> > ## 해답
 > > ~~~
 > > [\w.-]+@
 > > ~~~
-> > `\w` matches any word character (including digits and underscore)
+> > `\w` 숫자와 밑줄(`_`)을 포함한 임의 단어 문자를 매칭시킨다.
 > >
-> > `\.` matches any character
+> > `\.` 임의 문자를 매칭시킨다.
 > >
-> > `-` straightforward match, since it is not captured with `\.`
+> > `-` 대쉬를 매칭시킨다. 이유는 `\.`으로 잡아낼 수 없기 때문이다.
 > >
-> > `[]` the brackets enclose the boolean string that 'OR' the digits, word characters, characters and dash.
+> > `[]` 꺾쇠 괄호기호로 숫자, 단어 문자, 단어, 대쉬를 '또는(OR)' 방식으로 잡아내도록 지정한다.
 > >
-> > `+` matches any word character OR digit OR character OR `-` repeated 1 or more times
+> > `+` 기호는 임의 단어 문자 혹은 숫자 혹은 단어 혹은 대쉬(`-`)가 1회 이상 반복 매칭되도록 지정한다.
 > >
 > {: .solution}
 {: .challenge}
 
-> ## Finish the expression
-> The string after the "@" could contain any kind of word character, special character or digit in any combination and length as well as the dash. In addition, we know that it will end with two or three characters after a period (`.`) What expression would capture this. Hint: the `.` is also a regex expression, so you'll have to use the escape `\` to express a literal period. Note: for the string after the period, I did not try to match a character, since those rarely appear in the .xx or .xxx at the end of an email address.
-> > ## Solution
+> ## 정규표현식 마무리
+> "@" 뒤에 오는 문자열은 임의 단어 문자, 특수 문자, 숫자 뿐만 아니라 대쉬도 다양한 길이로 조합되어 표현된다.
+> 추가로, 마침표(`.`) 뒤에 두개 혹은 세개 문자로 끝나는 사실도 알고 ㅣㅇㅆ다.
+> 정규표현식을 어떻게 표현하면 이를 잡아낼 수 있을까?
+> 힌트: `.` 자체도 정규표현식이라 `.`을 문자 그대로 표현하려면 `\`을 사용해서 탈출시켜야 된다.
+> > ## 해답
 > > ~~~
 > > [\w.-]+\.[\w]{2,3}
 > > ~~~
-> > See the previous exercise for the explanation of the expression up to the `+`
 > >
-> > `\.` matches the literal periond ('.') not the regex expression `.`
+> > `\.` 은 정규표현식 `.` 이 아니라 문자 그래도 마침표('.')을 매칭시킨다.
 > >
-> > `\w` matches any word (including digits and underscore)
+> > `\w` 숫자와 밑줄(`_`)을 포함한 임의 단어 문자를 매칭시킨다.
 > >
 > > `{2,4}` limits the number of word characters and/or digits to a two or three-character string.
 > >
-> > `[]` the brackets enclose the boolean string that 'OR' the digits, word characters, characters and dash.
+> > `[]` 꺾쇠 괄호기호로 숫자, 단어 문자, 단어, 대쉬를 '또는(OR)' 방식으로 잡아내도록 지정한다.
 > >
-> > `+` matches any word character OR digit OR character OR `-` repeated 1 or more times
+> > `+` 기호는 임의 단어 문자 혹은 숫자 혹은 단어 혹은 대쉬(`-`)가 1회 이상 반복 매칭되도록 지정한다.
 > >
+> > **구글링(googling):** [Email Address Regular Expression That 99.99% Works.](https://emailregex.com/)
 > {: .solution}
 {: .challenge}
 
-### Exercise finding phone numbers, Using regex101.com
+### 전화번호를 찾아내는 연습문제 `regex101.com`을 활용
 
-Does this Code of Conduct contain a phone number?
+카펜트리 Code of Conduct에 전화번호가 담겨있을까?
 
-What to consider:
-1. It may or may not have a country code, perhaps starting with a "+"
-2. It will have an area code, potentially enclosed in parens
-3. It may have the sections all separated with a "-"
 
-> ## Start with what you know: find strings of digits
-> Start with what we know, which is the most basic format of a phone number: three digits, a dash, and four digits. How would we write a regex expression that matches this?
-> > ## Solution
+정규표현식 작성 시에 고려할 사항:
+1. "+"로 시작하는 국가 코드가 포함될 수도 없을 수도 있음.
+2. 괄호로 쌓인 상태로 지역코드가 전화번호에 포함될 수도 있음.
+3. "-"으로 잘 구분된 형태로 전화번호가 작성될 수도 있음.
+
+
+> ## 본인이 알고 있는 것부터 시작한다: 숫자 문자열을 매칭한다.
+> 본인이 알고있는 것부터 시작한다. 가장 기본적인 전화번호 형식은 무엇인가: 숫자 3개, 대쉬, 숫자 4개.
+> 전화번호 형식을 매칭시키는 정규표현식을 어떻게 작성할까?
+> > ## 해답
 > > ~~~
 > > \d{3}-\d{4}
 > > ~~~
-> > `\d` matches digits
+> > `\d` 임의 숫자를 매칭시킨다.
 > >
-> > `{3}` matches 3 digits
+> > `{3}` 숫자를 3번 매칭시킨다.
 > > 
-> > `-` matches the character '-'
+> > `-` 문자 '-'을 매칭시킨다.
 > >
-> > `\d` matches any digit
+> > `\d` 임의 숫자를 매칭시킨다.
 > >
-> > `{4}` matches 4 digits.
+> > `{4}` 숫자를 4번 매칭시킨다.
 > > 
-> >This expression should find three matches in the document.
+> > 상기 정규표현식은 문서에서 3번 매칭된 결과를 반환해야 한다.
 > {: .solution}
 {: .challenge}
 
-> ## Match a string that includes an area code with a dash
-> Start with what we know, which is the most basic format of a phone number: three digits, a dash, and four digits. How would we expand the expression to include an area code (three digits and a dash)?
-> > ## Solution
+> ## 대쉬 지역코드를 포함하는 문자열을 매칭시킨다.
+> 본인이 알고있는 것부터 시작한다. 가장 기본적인 전화번호 형식은 무엇인가: 숫자 3개, 대쉬, 숫자 4개.
+> 지역코드(숫자 3개와 대쉬)를 포함하도록 정규표현식을 어떻게 확장할 수 있을까?
+> > ## 해답
 > > ~~~
 > > \d{3}-\d{3}-\d{4}
 > > ~~~
-> > `\d` matches digits
+> > `\d` 임의 숫자를 매칭시킨다.
 > >
-> > `{3}` matches 3 digits
+> > `{3}` 숫자를 3번 매칭시킨다.
 > > 
-> > `-` matches the character '-'
+> > `-` 문자 '-'을 매칭시킨다.
 > >
-> > `\d` matches any digit
+> > `\d` 임의 숫자를 매칭시킨다.
 > >
-> > `{4}` matches 4 digits.
+> > `{4}` 숫자를 4번 매칭시킨다.
 > >
-> >This expression should find one match in the document
+> > 상기 정규표현식은 문서에서 1번 매칭된 결과를 반환해야 한다.
 > {: .solution}
 {: .challenge}
 
-> ## Match a string that includes an area code within parenthesis separated from the rest of the phone number with a space or without a space
-> Start with what we know, which is the most basic format of a phone number: three digits, a dash, and four digits. How would we expand the expression to include a phone number with an area code in parenthesis, separated from the phone number, with or without a space.
-> > ## Solution
+> ## 공백을 두거나 두지 않고 나머지 전화번호와 떨어져서 괄호로 지역코드를 담고 있는 전화번호 문자열을 매칭시켜라
+> 본인이 알고있는 것부터 시작한다. 가장 기본적인 전화번호 형식은 무엇인가: 숫자 3개, 대쉬, 숫자 4개.
+> 공백을 두거나 두지 않고 나머지 전화번호와 떨어져서 괄호로 지역코드를 담고 있는 전화번호 문자열을 매칭시킬 수 있도록 
+> 정규표현식을 확장할 수 있을까?
+> > ## 해답
 > > ~~~
 > >\(\d{3}\) ?\d{3}-\d{4}
 > > ~~~
-> > `\(` escape character with the parenthesis as straightforward character match
+> > `\(` 여는 괄호를 탈출문자(escape character)로 문자 그대로 매칭시킨다.
 > >
-> > `\d` matches digits
+> > `\d` 임의 숫자를 매칭시킨다.
 > >
-> > `{3}` matches 3 digits
+> > `{3}` 숫자를 3번 매칭시킨다.
 > > 
-> > `\)` escape character with the parenthesis as a straightforward character match
+> > `\)` 닫는 괄호를 탈출문자(escape character)로 문자 그대로 매칭시킨다.
 > >
-> > ` ?` matches zero or one spaces
+> > ` ?` 0번 혹은 1번 이상 공백을 매칭시킨다.
 > > 
-> > See the previous exercise for the explanation of the rest of the expression.
 > > 
-> > This expression should find two matches in the document.
+> > 상기 정규표현식은 문서에서 2번 매칭된 결과를 반환해야 한다.
 > {: .solution}
 {: .challenge}
 
-> ## Match a phone number containing a country code.
-> Country codes are preceded by a "+" and can have up to three digits. We also have to consider that there may or may not be a space between the country code and anything appearing next.
-> > ## Solution
+> ## 국가코드를 담고 있는 전화번호를 매칭시켜라
+> 국가코드는 "+"로 시작하는데 최대 3개까지 숫자를 가질 수 있다.
+> 국가코드와 다음 전화번호 사이에 공백이 있을 수도 없을 수도 있다.
+> > ## 해답
 > > ~~~
 > >\+\d{1,3} ?\(\d{3}\)\s?\d{3}-\d{4}
 > > ~~~
-> > `\+` escape character with the plus sign as straightforward character match
+> > `\+` 더하기 문자를 탈출문자(escape character)로 문자 그대로 매칭시킨다.
 > >
-> > `\d` matches digits
+> > `\d` 임의 숫자를 매칭시킨다.
 > >
-> > `{1,3}` matches 1 to 3 digits
+> > `{1,3}` 한자리에서 세자리까지 숫자를 매칭시킨다.
 > >
-> > ` ?` matches zero or one spaces
+> > ` ?` 0번 혹은 1번 이상 공백을 매칭시킨다.
 > > 
-> > See the previous exercise for the explanation of the rest of the expression.
 > > 
-> > This expression should find one match in the document.
+> > 상기 정규표현식은 문서에서 1번 매칭된 결과를 반환해야 한다.
 > {: .solution}
 {: .challenge}
 
 One of the reasons we stress the value of consistent and predictable directory and filenaming conventions is that working in this way enables you to use the computer to select files based on the characteristics of their file names. For example, if you have a bunch of files where the first four digits are the year and you only want to do something with files from '2017', then you can. Or if you have 'journal' somewhere in a filename when you have data about journals, you can use the computer to select just those files. Equally, using plain text formats means that you can go further and select files or elements of files based on characteristics of the data *within* those files.
 
-> ## Extracting a substring in Google Sheets using regex
-> 1. Export the the [2014 Public Library Survey](https://data.imls.gov/Public-Libraries-Survey/Main-Libraries-Branches-and-Bookmobiles-FY-2014-Pu/ucdn-7aur/data) from the IMLS data site as a CSV file.
-> 2. Upload to Google Sheets and open as a Google Sheet if it doesn't do this by default.
-> 3. Look in the `LOCATION` column and notice that the values contain the latitude and longitude in parenthesis after the library address.
-> 4. Construct a regular expression to match and extract the latitude and longitude into a new column named 'latlong'. HINT: Look up the function `REGEXEXTRACT` in Google Sheets. That function expects the first argument to be a string (a cell in `LOCATION` column) and a quoted regular expression in the second.
->
->> ## Solution
-> > This is one way to solve this challenge. You might have found others. Inside the cell you can use the below to extract the Latitude and Longitude into a single cell. You can then copy the formula down to the end of the column.
->>~~~
-> > =REGEXEXTRACT(G2,"\d+\.\d+, -?\d+\.\d+")
-> >~~~
-> >{: .source}
-> > Here we are using `\d+` for a one or more digit match followed by a period `\.`. Note we had to escape the period using `\`. After the period we look for one or more digits  `\d+` again followed by a literal comma `,`. We then have a literal space match followed by an optional dash `-` (there are few `0.0` Latitude/Longitudes that are probably errors, but we'd want to retain so we can deal with them). We then repeat our `\d+\.\d+` we used for the Latitude match.
-> {: .solution}
-{: .challenge}
+
+일관되고 예측가능한 디렉토리와 파일명 규칙을 강조하는 이유 중의 하나는 
+이런 방식으로 작업이 되어 있는 경우 컴퓨터를 사용해서 파일명 특성에 기초하여 파일을 찾을 수 있기 때문이다.
+예를 들어, 파일이 엄청나게 많은데 파일명 첫 네숫자가 연도로 되어 있으며 '2017'부터 시작되는 파일로 무언가를 하고자 하는 경우
+당연히 작업을 수행할 수 있다.
+혹은 저널에 대한 데이터가 있는데 파일명 어딘가에 'jounral'이 포함된 경우, 컴퓨터를 사용해서 해당 파일을 찾아낼 수 있다.
+평문 텍스트 형식(plain text format)을 사용할 수 있다는 것은 
+파일을 선택하거나 파일 내부 데이터 특성에 기반하여 파일 구성요소를 추출할 수 있다는 것과 같다.
