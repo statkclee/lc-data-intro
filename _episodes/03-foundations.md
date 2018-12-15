@@ -58,7 +58,28 @@ keypoints:
 
 ![그럴만한 가치가 있나?](../assets/img/is_it_worth_the_time.png)
 
+상기 표를 읽는 방법은 다음과 같다. [^explain-table]
+
+- 1주에 한번씩 5년 작업하한다면 260번 작업을 수행: 1년 52주 곱하기 5년 = 260
+- 260 횟수 × 1 분 = 260분 = 4.3 시간
+
+[^explain-table]: [xkcd - 1205: Is It Worth the Time?](https://explainxkcd.com/wiki/index.php/1205)
+
 Randall Munroe가 저작한 '그럴만한 가치가 있나(Is it worth the time)?', CC-BY-NC 2.5 라이선스 [https://xkcd.com/1205/](https://xkcd.com/1205/).
+
+### 자동화의 두얼굴 
+
+
+- [Explain xkcd - 1319: Automation](https://explainxkcd.com/wiki/index.php/1319:_Automation)
+    - "automating" translates to self-screwing ("screwing yourself over", giving yourself a hard time)
+
+<img src="../fig/xkcd-automation.png" alt="자동화(automation)" width="37%" />
+
+- [Explain xkcd - 974: The General Problem](https://explainxkcd.com/wiki/index.php/974:_The_General_Problem)
+    - Put simply, the comic draws attention to the fact that humans are very adept at things that can be difficult to teach machines. We learn as children how to pass arbitrary things to someone who asks. However, to design a 'system' to do this, can be quite difficult - dealing with recognition, shape, size, temperature, etc. There is an engineering joke here that novices often attempt to solve general systems problems that seem trivial at first sight, but can end up taking years to solve. The superficial joke is that a human would have to think at all to do this, let alone 20 minutes.
+
+<img src="../fig/the_general_problem.png" alt="General Problem" width="37%" />
+
 
 ### 키보드 단축키가 여러분의 친구입니다.
 
